@@ -1,0 +1,33 @@
+import React from 'react';
+import { TextInput, View, Text, StyleSheet } from 'react-native';
+
+interface Props {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export const TestTextInput = ({ value, onChange }: Props) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>Texto a Evaluar: </Text>
+      <TextInput
+        value={value}
+        onChangeText={onChange}
+        placeholder="Ej: 123-45-6789"
+        style={styles.input}
+        multiline
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { gap: 4 },
+  label: { fontWeight: '600' },
+  input: {
+    borderWidth: 1,
+    padding: 8,
+    borderRadius: 6,
+    minHeight: 60,
+  },
+});
