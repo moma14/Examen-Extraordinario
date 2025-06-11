@@ -1,11 +1,11 @@
-import React from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { RegexInput } from '../components/RegexInput';
 import { TestTextInput } from '../components/TestTextInput';
 import { useRegexTesterViewModel } from '../viewmodel/useRegexTesterViewModel';
 import { MatchHighlighter } from '../components/MatchHighlighter';
 import { generateAST } from '../../domain/usecases/GenerateASTUseCase';
-import { ASTViewer } from '../components/ASTViewer';
+import { ASTViewer } from '../components/ASTViewer'
+import React, { useEffect, useMemo, useState } from 'react';;
 
 export const RegexTesterScreen = () => {
     const {
@@ -18,13 +18,38 @@ export const RegexTesterScreen = () => {
     } = useRegexTesterViewModel();
 
     // con esto se genera el AST, que es en tiempo real según la expresión
-    const astResult = React.useMemo(() => {
-        if (!expression.trim()) return { ast: null, error: null }; //si el input está vacío, no evalúa
-        return generateAST(expression);
+
+
+    // con esto se genera el AST, que es en tiempo real según la expresión
+    const [ast, setAst] = useState<any | null>(null);
+    const [astError, setAstError] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (!expression.trim()) {
+            setAst(null);
+            setAstError(null);
+            return;
+        }
+        const { ast, error } = generateAST(expression);
+        //  Si la expresión es válida, guarda el AST y limpia el error
+        if (ast) {
+            setAst(ast);
+            setAstError(null);
+            return;
+        }
+
+        //  Si hay error, lo muéstra temporalmente
+        if (error) {
+            setAst(null);
+            setAstError(error);
+
+            const timer = setTimeout(() => {
+                setAstError(null);
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
     }, [expression]);
-
-    const { ast, error: astError } = astResult;
-
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.title}>Tester de Expresiones Regulares</Text>
@@ -45,15 +70,13 @@ export const RegexTesterScreen = () => {
                     {/*aqui se visualiza el AST */}
                     <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
                     {ast ? (
-                        /*con esto se visualizan los errores */
                         <ASTViewer ast={ast} />
-                    ) : expression.trim() ? (
-                        <Text style={styles.error}>No se pudo generar el AST</Text>
                     ) : null}
 
-                    {astError && expression.trim() && (
+                    {astError && (
                         <Text style={styles.error}>Error generando AST: {astError}</Text>
                     )}
+
                 </>
             )}
         </ScrollView>
