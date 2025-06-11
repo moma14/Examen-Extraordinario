@@ -7,9 +7,7 @@ import { MatchHighlighter } from '../components/MatchHighlighter';
 import { generateAST } from '../../domain/usecases/GenerateASTUseCase';
 import { ASTViewer } from '../components/ASTViewer';
 
-
 export const RegexTesterScreen = () => {
-
     const {
         expression,
         testText,
@@ -19,8 +17,13 @@ export const RegexTesterScreen = () => {
         error,
     } = useRegexTesterViewModel();
 
-    const ast = generateAST(expression); //con esto se genera el AST, que es en tiempo real
-    //segun la expresión
+    // con esto se genera el AST, que es en tiempo real según la expresión
+    const astResult = React.useMemo(() => {
+        if (!expression.trim()) return { ast: null, error: null }; //si el input está vacío, no evalúa
+        return generateAST(expression);
+    }, [expression]);
+
+    const { ast, error: astError } = astResult;
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -42,11 +45,15 @@ export const RegexTesterScreen = () => {
                     {/*aqui se visualiza el AST */}
                     <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
                     {ast ? (
+                        /*con esto se visualizan los errores */
                         <ASTViewer ast={ast} />
-                    ) : (
+                    ) : expression.trim() ? (
                         <Text style={styles.error}>No se pudo generar el AST</Text>
-                    )}
+                    ) : null}
 
+                    {astError && expression.trim() && (
+                        <Text style={styles.error}>Error generando AST: {astError}</Text>
+                    )}
                 </>
             )}
         </ScrollView>
@@ -69,8 +76,8 @@ const styles = StyleSheet.create({
         color: 'green',
     },
     subtitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginTop: 10,
-  },
+        fontSize: 18,
+        fontWeight: '600',
+        marginTop: 10,
+    },
 });

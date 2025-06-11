@@ -1,19 +1,20 @@
 import { parse } from 'regexp-tree';
 
-//con esto se genera el AST
-export function generateAST(expression: string) {
+export function generateAST(expression: string): { ast: any | null; error: string | null } {
   try {
-    // Si el usuario escribió con delimitadores, no se hace nada
-    const isWrapped = expression.match(/^\/(.+)\/([gimsuy]*)$/);
+    if (!expression.trim()) return { ast: null, error: null }; //con esto no parsea el campo vacío
+    //para evitar que salte el error cuando no hay nada 
 
-    const input = isWrapped
-      ? expression 
-      : `/${expression}/`; // si no se envuelve la envolvemos nosotros
+    const isWrapped = expression.match(/^\/(.+)\/([gimsuy]*)$/);
+    const input = isWrapped ? expression : `/${expression}/`;
 
     const ast = parse(input);
-    return ast;
-  } catch (err) {
-    console.error(' Error generando AST:', err);
-    return null;
+    return { ast, error: null };
+  } catch (err: unknown) {
+    
+    //aqui se manejan los errores
+    const errorMsg = err instanceof Error ? err.message : 'Error desconocido';
+    console.error(' Error generando AST:', errorMsg);
+    return { ast: null, error: errorMsg };
   }
 }
