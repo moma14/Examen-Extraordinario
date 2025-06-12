@@ -6,6 +6,7 @@ import { MatchHighlighter } from '../components/MatchHighlighter';
 import { generateAST } from '../../domain/usecases/GenerateASTUseCase';
 import { ASTViewer } from '../components/ASTViewer'
 import React, { useEffect, useMemo, useState } from 'react';;
+import { ASTTreeViewer } from '../components/ASTTreeViewer';
 
 export const RegexTesterScreen = () => {
     const {
@@ -17,7 +18,6 @@ export const RegexTesterScreen = () => {
         error,
     } = useRegexTesterViewModel();
 
-    // con esto se genera el AST, que es en tiempo real según la expresión
 
 
     // con esto se genera el AST, que es en tiempo real según la expresión
@@ -70,7 +70,7 @@ export const RegexTesterScreen = () => {
                     {/*aqui se visualiza el AST */}
                     <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
                     {ast ? (
-                        <ASTViewer ast={ast} />
+                        <ASTTreeViewer ast={ast} />
                     ) : null}
 
                     {astError && (
