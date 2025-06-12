@@ -85,7 +85,8 @@ export const RegexTesterScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
+        paddingTop: 60,
+        padding: 30,
         gap: 20,
     },
     title: {

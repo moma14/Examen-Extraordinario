@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
   },
   label: {
-    fontSize: 14,
+    fontSize: 19,
     fontWeight: '500',
   },
   children: {
