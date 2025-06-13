@@ -39,7 +39,7 @@ function escapeRegExp(str: string) {
 const styles = StyleSheet.create({
   text: {
     marginTop: 16,
-    fontSize: 16,
+    fontSize: 17,
     lineHeight: 22,
   },
   highlight: {

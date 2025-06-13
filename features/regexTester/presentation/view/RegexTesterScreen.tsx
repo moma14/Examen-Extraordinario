@@ -4,7 +4,6 @@ import { TestTextInput } from '../components/TestTextInput';
 import { useRegexTesterViewModel } from '../viewmodel/useRegexTesterViewModel';
 import { MatchHighlighter } from '../components/MatchHighlighter';
 import { generateAST } from '../../domain/usecases/GenerateASTUseCase';
-import { ASTViewer } from '../components/ASTViewer'
 import React, { useEffect, useMemo, useState } from 'react';;
 import { ASTTreeViewer } from '../components/ASTTreeViewer';
 
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
         gap: 20,
     },
     title: {
-        fontSize: 22,
+        fontSize: 23,
         fontWeight: 'bold',
     },
     error: {
@@ -98,6 +97,7 @@ const styles = StyleSheet.create({
     },
     matches: {
         color: 'green',
+        fontSize: 18,
     },
     subtitle: {
         fontSize: 18,

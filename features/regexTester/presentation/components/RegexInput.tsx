@@ -24,9 +24,10 @@ export const RegexInput = ({ value, onChange }: Props) => {
 
 const styles = StyleSheet.create({
   container: { gap: 4 },
-  label: { fontWeight: '600' },
+  label: { fontWeight: '600',fontSize:18 },
   input: {
     borderWidth: 1,
+    fontSize:16,
     padding: 8,
     borderRadius: 6,
   },
