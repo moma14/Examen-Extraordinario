@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useState } from 'react';;
 import { ASTTreeViewer } from '../components/ASTTreeViewer';
 import { RegexStorageSQLite } from '../../data/local/RegexStorageSQLite';
 import { RegexExpression } from '../../domain/entities/RegexExpression';
+import { useRouter } from 'expo-router';
 
 
 
@@ -23,9 +24,10 @@ export const RegexTesterScreen = () => {
     // con esto se genera el AST, que es en tiempo real según la expresión
     const [ast, setAst] = useState<any | null>(null);
     const [astError, setAstError] = useState<string | null>(null);
-
     const [savedExpressions, setSavedExpressions] = useState<RegexExpression[]>([]);
     const [saveMessage, setSaveMessage] = useState('');
+    const router = useRouter();
+
 
 
     useEffect(() => {
@@ -73,7 +75,7 @@ export const RegexTesterScreen = () => {
 
                     {/*este boton hace que se guarde la expresion regular en la tabla que pusimos */}
                     {/*usando SQlite */}
-                       <Button
+                    <Button
                         title="Guardar Expresión"
                         onPress={async () => {
                             try {
@@ -89,28 +91,10 @@ export const RegexTesterScreen = () => {
                             }
                         }}
                     />
-                    {/*y aqui me consulta las expresiones que guarde en la tabla */}
                     <Button
                         title="Mostrar expresiones guardadas"
-                        onPress={async () => {
-                            const data = await RegexStorageSQLite.getAll();
-                            setSavedExpressions(data);
-                        }}
+                        onPress={() => router.push('/(drawer)/Historial')}
                     />
-                    {/*estos mensajes los muestra si se guardo bien la expresion o si hubo algun error */}
-                    {saveMessage !== '' && <Text style={styles.info}>{saveMessage}</Text>}
-
-                    {savedExpressions.length > 0 && (
-                        <>
-                            <Text style={styles.subtitle}>Expresiones guardadas:</Text>
-                            {savedExpressions.map((item, idx) => (
-                                <Text key={idx} style={styles.savedItem}>
-                                    /{item.pattern}/{item.flags}
-                                </Text>
-                            ))}
-                        </>
-                    )}
-                    
                     {/*aqui se visualiza el AST */}
                     <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
                     {ast ? (
