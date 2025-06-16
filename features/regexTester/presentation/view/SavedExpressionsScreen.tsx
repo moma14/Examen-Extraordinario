@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
 import { RegexExpression } from '../../domain/entities/RegexExpression';
 import { RegexStorageSQLite } from '../../data/local/RegexStorageSQLite';
 import { useRouter } from 'expo-router';
+import { useFocusEffect } from 'expo-router';
 
 export const SavedExpressionsScreen = () => {
   const [savedExpressions, setSavedExpressions] = useState<RegexExpression[]>([]);
@@ -16,10 +17,22 @@ export const SavedExpressionsScreen = () => {
     load();
   }, []);
 
+  //esto hace que se actualicen las expresiones en la vista del historial al entrar 
+  useFocusEffect(
+    React.useCallback(() => {
+      const load = async () => {
+        const data = await RegexStorageSQLite.getAll();
+        setSavedExpressions(data);
+      };
+      load();
+    }, [])
+  );
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Expresiones Guardadas</Text>
 
+      {/*Este texto se mostrará si no hay ninguna expresion guardada */}
       {savedExpressions.length === 0 ? (
         <Text>No hay expresiones guardadas.</Text>
       ) : (
@@ -29,7 +42,8 @@ export const SavedExpressionsScreen = () => {
           </Text>
         ))
       )}
-
+      
+      {/*Este boton es para regresar a la vista principal */}
       <View style={{ marginTop: 20 }}>
         <Button title="Regresar" onPress={() => router.back()} />
       </View>

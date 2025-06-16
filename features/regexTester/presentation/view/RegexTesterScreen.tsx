@@ -86,8 +86,10 @@ export const RegexTesterScreen = () => {
 
                                 await RegexStorageSQLite.save({ pattern, flags });
                                 setSaveMessage('Expresión guardada');
+                                setTimeout(() => setSaveMessage(''), 3000);
                             } catch (err) {
                                 setSaveMessage(' Error al guardar');
+                                setTimeout(() => setSaveMessage(''), 3000);
                             }
                         }}
                     />
@@ -95,6 +97,11 @@ export const RegexTesterScreen = () => {
                         title="Mostrar expresiones guardadas"
                         onPress={() => router.push('/(drawer)/Historial')}
                     />
+
+                    {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
+                    {saveMessage !== '' && (
+                            <Text style={styles.info}>{saveMessage}</Text>
+                    )}
                     {/*aqui se visualiza el AST */}
                     <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
                     {ast ? (
