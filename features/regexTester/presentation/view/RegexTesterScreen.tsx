@@ -9,6 +9,7 @@ import { ASTTreeViewer } from '../components/ASTTreeViewer';
 import { RegexStorageSQLite } from '../../data/local/RegexStorageSQLite';
 import { RegexExpression } from '../../domain/entities/RegexExpression';
 import { useRouter } from 'expo-router';
+import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpressionUseCase';
 
 
 
@@ -84,7 +85,11 @@ export const RegexTesterScreen = () => {
                                 const pattern = match ? match[1] : expression;
                                 const flags = match ? match[2] : 'g';
 
-                                await RegexStorageSQLite.save({ pattern, flags });
+                                const exprObj = { pattern, flags };
+
+                                await RegexStorageSQLite.save(exprObj); // guardar en SQLite
+                                saveRecentExpression(exprObj);           // guardar en Zustand solo si el usuario lo decide
+
                                 setSaveMessage('Expresión guardada');
                                 setTimeout(() => setSaveMessage(''), 3000);
                             } catch (err) {
@@ -93,6 +98,7 @@ export const RegexTesterScreen = () => {
                             }
                         }}
                     />
+
                     <Button
                         title="Mostrar expresiones guardadas"
                         onPress={() => router.push('/(drawer)/Historial')}
@@ -100,7 +106,7 @@ export const RegexTesterScreen = () => {
 
                     {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
                     {saveMessage !== '' && (
-                            <Text style={styles.info}>{saveMessage}</Text>
+                        <Text style={styles.info}>{saveMessage}</Text>
                     )}
                     {/*aqui se visualiza el AST */}
                     <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>

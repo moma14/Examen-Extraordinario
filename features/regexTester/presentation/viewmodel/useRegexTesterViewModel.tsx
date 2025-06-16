@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { RegexExpression } from '../../domain/entities/RegexExpression';
+import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpressionUseCase';
+
 
 export function useRegexTesterViewModel() {
   const [expression, setExpression] = useState<string>(''); // Regex escrita
@@ -24,11 +26,6 @@ export function useRegexTesterViewModel() {
       setError(null);
       console.log(' Coincidencias:', found);
 
-      // guardar en recientes si es válido
-      const pattern = match ? match[1] : expression;
-      const flags = match ? match[2] : 'g';
-      const expressionObj: RegexExpression = { pattern, flags };
-      
 
     } catch (err) {
       setMatches([]);

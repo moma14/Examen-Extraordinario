@@ -1,48 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
-import { RegexExpression } from '../../domain/entities/RegexExpression';
-import { RegexStorageSQLite } from '../../data/local/RegexStorageSQLite';
 import { useRouter } from 'expo-router';
-import { useFocusEffect } from 'expo-router';
+import { useRegexStore } from '../../../../app/store/useRegexStore'; // Asegúrate de que esta ruta sea correcta
 
 export const SavedExpressionsScreen = () => {
-  const [savedExpressions, setSavedExpressions] = useState<RegexExpression[]>([]);
   const router = useRouter();
-
-  useEffect(() => {
-    const load = async () => {
-      const data = await RegexStorageSQLite.getAll();
-      setSavedExpressions(data);
-    };
-    load();
-  }, []);
-
-  //esto hace que se actualicen las expresiones en la vista del historial al entrar 
-  useFocusEffect(
-    React.useCallback(() => {
-      const load = async () => {
-        const data = await RegexStorageSQLite.getAll();
-        setSavedExpressions(data);
-      };
-      load();
-    }, [])
-  );
+  const { recentExpressions } = useRegexStore(); // ← usamos la store Zustand
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Expresiones Guardadas</Text>
 
       {/*Este texto se mostrará si no hay ninguna expresion guardada */}
-      {savedExpressions.length === 0 ? (
+      {recentExpressions.length === 0 ? (
         <Text>No hay expresiones guardadas.</Text>
       ) : (
-        savedExpressions.map((item, idx) => (
+        recentExpressions.map((item, idx) => (
           <Text key={idx} style={styles.item}>
             /{item.pattern}/{item.flags}
           </Text>
         ))
       )}
-      
+
       {/*Este boton es para regresar a la vista principal */}
       <View style={{ marginTop: 20 }}>
         <Button title="Regresar" onPress={() => router.back()} />
