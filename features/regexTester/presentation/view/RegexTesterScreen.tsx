@@ -113,7 +113,7 @@ export const RegexTesterScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 60,
+        paddingTop: 30,
         padding: 30,
         gap: 20,
     },

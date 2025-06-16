@@ -43,13 +43,14 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   title: {
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   item: {
-    fontSize: 16,
+    fontSize: 18,
     paddingVertical: 4,
+    fontWeight: 'bold',
     color: '#444',
   },
 });
