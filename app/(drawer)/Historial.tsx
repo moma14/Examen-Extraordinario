@@ -1,3 +1,3 @@
-import {SavedExpressionsScreen} from '../../features/regexTester/presentation/view/SavedExpressionsScreen'
+import {HistorialScreen} from '../../features/regexTester/presentation/view/HistorialScreen'
 
-export default SavedExpressionsScreen;
+export default HistorialScreen;

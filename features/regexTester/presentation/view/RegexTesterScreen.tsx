@@ -101,7 +101,7 @@ export const RegexTesterScreen = () => {
 
                     <Button
                         title="Mostrar expresiones guardadas"
-                        onPress={() => router.push('/(drawer)/Historial')}
+                        onPress={() => router.push('/(drawer)/Recientes')}
                     />
 
                     {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     subtitle: {
-        fontSize: 18,
+        fontSize: 19,
         fontWeight: '600',
         marginTop: 10,
     },

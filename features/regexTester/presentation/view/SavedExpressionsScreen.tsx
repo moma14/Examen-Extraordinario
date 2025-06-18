@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useRegexStore } from '../../../../app/store/useRegexStore'; // Asegúrate de que esta ruta sea correcta
+import { useRegexStore } from '../../../../app/store/useRegexStore'; 
 
 export const SavedExpressionsScreen = () => {
   const router = useRouter();
-  const { recentExpressions } = useRegexStore(); // ← usamos la store Zustand
+  const { recentExpressions } = useRegexStore(); // usamos la store Zustand
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -13,7 +13,7 @@ export const SavedExpressionsScreen = () => {
 
       {/*Este texto se mostrará si no hay ninguna expresion guardada */}
       {recentExpressions.length === 0 ? (
-        <Text>No hay expresiones guardadas.</Text>
+        <Text>Aún no hay expresiones guardadas.</Text>
       ) : (
         recentExpressions.map((item, idx) => (
           <Text key={idx} style={styles.item}>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   item: {
-    fontSize: 18,
+    fontSize: 19,
     paddingVertical: 4,
     fontWeight: 'bold',
     color: '#444',
