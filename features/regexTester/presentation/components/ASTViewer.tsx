@@ -27,6 +27,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     fontFamily: 'monospace',
-    color:'red',
   },
 });

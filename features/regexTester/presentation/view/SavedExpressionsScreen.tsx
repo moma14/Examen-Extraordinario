@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useRegexStore } from '../../../../app/store/useRegexStore'; 
+import { useRegexStore } from '../../../../app/store/useRegexStore';
 
 export const SavedExpressionsScreen = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ export const SavedExpressionsScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Expresiones Guardadas</Text>
+      <Text style={styles.title}>Expresiones Recientes</Text>
 
       {/*Este texto se mostrará si no hay ninguna expresion guardada */}
       {recentExpressions.length === 0 ? (
@@ -23,9 +23,9 @@ export const SavedExpressionsScreen = () => {
       )}
 
       {/*Este boton es para regresar a la vista principal */}
-      <View style={{ marginTop: 20 }}>
-        <Button title="Regresar" onPress={() => router.back()} />
-      </View>
+      <Pressable style={styles.button} onPress={() => router.back()} >
+        <Text style={styles.buttontext}>Regresar:</Text>
+      </Pressable>
     </ScrollView>
   );
 };
@@ -40,12 +40,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  buttontext: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 2,
+    color:'white'
+  },
   item: {
     fontSize: 19,
     paddingVertical: 4,
     fontWeight: 'bold',
     color: '#444',
   },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#007AFF",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  }
 });
 
 export default SavedExpressionsScreen;

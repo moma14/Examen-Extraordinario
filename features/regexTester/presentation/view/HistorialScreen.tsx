@@ -1,20 +1,22 @@
 import { Pressable } from "react-native";
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { useRouter } from 'expo-router';
 
 
 
-export const HistorialScreen=()=>{
-    return(
+export const HistorialScreen = () => {
+    const router = useRouter();
+    return (
         <View style={styles.container}>
-            <Text style={styles.text}>Historial</Text>
-                <Pressable style={styles.button} onPress={()=>{}}>
-                    <Text style={styles.buttonText}>Regresar:</Text>
-                </Pressable>
+            <Text style={styles.title}>Historial</Text>
+            <Pressable style={styles.button} onPress={() => router.back()} >
+                <Text style={styles.buttonText}>Regresar:</Text>
+            </Pressable>
         </View>
     )
 }
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
 
     container: {
         flex: 1,
@@ -26,6 +28,11 @@ const styles=StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         marginBottom: 20,
+    },
+    title: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginBottom: 10,
     },
     countText: {
         fontSize: 16,
