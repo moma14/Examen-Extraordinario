@@ -24,7 +24,7 @@ export const SavedExpressionsScreen = () => {
 
       {/*Este boton es para regresar a la vista principal */}
       <Pressable style={styles.button} onPress={() => router.back()} >
-        <Text style={styles.buttontext}>Regresar:</Text>
+        <Text style={styles.buttontext}>Regresar</Text>
       </Pressable>
     </ScrollView>
   );

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet, Button } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Button, Pressable } from 'react-native';
 import { RegexInput } from '../components/RegexInput';
 import { TestTextInput } from '../components/TestTextInput';
 import { useRegexTesterViewModel } from '../viewmodel/useRegexTesterViewModel';
@@ -76,8 +76,8 @@ export const RegexTesterScreen = () => {
 
                     {/*este boton hace que se guarde la expresion regular en la tabla que pusimos */}
                     {/*usando SQlite */}
-                    <Button
-                        title="Guardar Expresión"
+                    <Pressable
+                        style={styles.button}
                         onPress={async () => {
                             try {
                                 if (!expression.trim()) return;
@@ -97,12 +97,12 @@ export const RegexTesterScreen = () => {
                                 setTimeout(() => setSaveMessage(''), 3000);
                             }
                         }}
-                    />
+                    ><Text style={styles.buttonText}>Guardar Expresión</Text></Pressable>
 
-                    <Button
-                        title="Mostrar expresiones guardadas"
+                    <Pressable
+                       style={styles.button} 
                         onPress={() => router.push('/(drawer)/Recientes')}
-                    />
+                    ><Text style={styles.buttonText}>Mostrar expresiones guardadas</Text></Pressable>
 
                     {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
                     {saveMessage !== '' && (
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         padding: 30,
         gap: 20,
+        
     },
     title: {
         fontSize: 23,
@@ -155,6 +156,17 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         color: '#444',
     },
+    button:{
+        alignItems: "center",
+        backgroundColor: "#007AFF",
+        borderRadius: 8,
+        padding: 10,
+        marginBottom: 2,
+    },
+    buttonText:{
+        color:'white',
+        fontSize:18,
+    }
 
 
 });
