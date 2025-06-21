@@ -37,15 +37,24 @@ export const RegexTesterScreen = () => {
             setAstError(null);
             return;
         }
+
         const { ast, error } = generateAST(expression);
-        //  Si la expresión es válida, guarda el AST y limpia el error
+
         if (ast) {
             setAst(ast);
             setAstError(null);
+
+            // Solo guardar en Zustand si se genera exitosamente el AST
+            const match = expression.match(/^\/(.+)\/([gimsuy]*)$/);
+            const pattern = match ? match[1] : expression;
+            const flags = match ? match[2] : 'g';
+
+            const exprObj = { pattern, flags };
+            saveRecentExpression(exprObj); // se guarda en la store solo si el AST es válido
+
             return;
         }
 
-        //  Si hay error, lo muéstra temporalmente
         if (error) {
             setAst(null);
             setAstError(error);
@@ -57,6 +66,7 @@ export const RegexTesterScreen = () => {
             return () => clearTimeout(timer);
         }
     }, [expression]);
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.title}>Tester de Expresiones Regulares</Text>
@@ -100,7 +110,7 @@ export const RegexTesterScreen = () => {
                     ><Text style={styles.buttonText}>Guardar Expresión</Text></Pressable>
 
                     <Pressable
-                       style={styles.button} 
+                        style={styles.button}
                         onPress={() => router.push('/(drawer)/Recientes')}
                     ><Text style={styles.buttonText}>Mostrar expresiones guardadas</Text></Pressable>
 
@@ -129,7 +139,7 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         padding: 30,
         gap: 20,
-        
+
     },
     title: {
         fontSize: 23,
@@ -156,16 +166,16 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         color: '#444',
     },
-    button:{
+    button: {
         alignItems: "center",
         backgroundColor: "#007AFF",
         borderRadius: 8,
         padding: 10,
         marginBottom: 2,
     },
-    buttonText:{
-        color:'white',
-        fontSize:18,
+    buttonText: {
+        color: 'white',
+        fontSize: 18,
     }
 
 
