@@ -10,6 +10,7 @@ import { RegexStorageSQLite } from '../../data/local/RegexStorageSQLite';
 import { RegexExpression } from '../../domain/entities/RegexExpression';
 import { useRouter } from 'expo-router';
 import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpressionUseCase';
+import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
 
 
 
@@ -28,6 +29,7 @@ export const RegexTesterScreen = () => {
     const [savedExpressions, setSavedExpressions] = useState<RegexExpression[]>([]);
     const [saveMessage, setSaveMessage] = useState('');
     const router = useRouter();
+    const { addFavorite } = useFavoriteRegexStore();
 
 
 
@@ -97,13 +99,13 @@ export const RegexTesterScreen = () => {
 
                                 const exprObj = { pattern, flags };
 
-                                await RegexStorageSQLite.save(exprObj); // guardar en SQLite
-                                saveRecentExpression(exprObj);           // guardar en Zustand solo si el usuario lo decide
+                                await RegexStorageSQLite.save(exprObj); 
+                                addFavorite(exprObj); // guardar en favoritos (Zustand)
 
-                                setSaveMessage('Expresión guardada');
+                                setSaveMessage('Expresión guardada en favoritos');
                                 setTimeout(() => setSaveMessage(''), 3000);
                             } catch (err) {
-                                setSaveMessage(' Error al guardar');
+                                setSaveMessage(' Error al guardar en favoritos');
                                 setTimeout(() => setSaveMessage(''), 3000);
                             }
                         }}
