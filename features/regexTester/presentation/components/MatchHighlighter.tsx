@@ -39,8 +39,11 @@ function escapeRegExp(str: string) {
 const styles = StyleSheet.create({
   text: {
     marginTop: 16,
-    fontSize: 17,
+    fontSize: 20,
     lineHeight: 22,
+    fontFamily:'Comic Sans MS',
+    fontStyle: 'italic',
+    fontWeight: 'bold'
   },
   highlight: {
     backgroundColor: 'yellow',

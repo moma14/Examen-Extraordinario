@@ -31,16 +31,23 @@ export const TreeNode = ({ label, children }: Props) => {
 const styles = StyleSheet.create({
   node: {
     paddingLeft: 12,
-    marginVertical: 2,
+    marginVertical: 4,
+    borderLeftWidth: 1,
+    borderColor: '#e0e0e0',
   },
   label: {
-    fontSize: 19,
-    fontWeight: '500',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#064aa5',
+    backgroundColor: '#F4F6F8', 
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 6,
+    overflow: 'hidden',
   },
   children: {
-    paddingLeft: 10,
-    borderLeftWidth: 1,
-    borderColor: '#ccc',
-    marginLeft: 6,
+    marginTop: 4,
+    paddingLeft: 12,
   },
 });
+

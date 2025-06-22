@@ -113,8 +113,8 @@ export const RegexTesterScreen = () => {
 
                     <Pressable
                         style={styles.button}
-                        onPress={() => router.push('/(drawer)/Recientes')}
-                    ><Text style={styles.buttonText}>Mostrar expresiones guardadas</Text></Pressable>
+                        onPress={() => router.push('/(drawer)/Favoritos')}
+                    ><Text style={styles.buttonText}>Mostrar expresiones favoritas</Text></Pressable>
 
                     {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
                     {saveMessage !== '' && (
