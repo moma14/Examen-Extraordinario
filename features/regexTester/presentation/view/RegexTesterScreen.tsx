@@ -11,7 +11,7 @@ import { RegexExpression } from '../../domain/entities/RegexExpression';
 import { useRouter } from 'expo-router';
 import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpressionUseCase';
 import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
-
+import { ExpressionSavePanel } from '../../../../shared/components/organisms/ExpressionSavePanel';
 
 
 export const RegexTesterScreen = () => {
@@ -27,9 +27,10 @@ export const RegexTesterScreen = () => {
     const [ast, setAst] = useState<any | null>(null);
     const [astError, setAstError] = useState<string | null>(null);
     const [savedExpressions, setSavedExpressions] = useState<RegexExpression[]>([]);
-    const [saveMessage, setSaveMessage] = useState('');
     const router = useRouter();
     const { addFavorite } = useFavoriteRegexStore();
+    const [saveMessage, setSaveMessage] = useState('');
+
 
 
 
@@ -86,30 +87,15 @@ export const RegexTesterScreen = () => {
                     {/*esto hace que se marquen las coincidencias encontradas */}
                     <MatchHighlighter text={testText} matches={matches} />
 
-                    {/*este boton hace que se guarde la expresion regular en la tabla que pusimos */}
-                    {/*usando SQlite */}
-                    <Pressable
-                        style={styles.button}
-                        onPress={async () => {
-                            try {
-                                if (!expression.trim()) return;
-                                const match = expression.match(/^\/(.+)\/([gimsuy]*)$/);
-                                const pattern = match ? match[1] : expression;
-                                const flags = match ? match[2] : 'g';
-
-                                const exprObj = { pattern, flags };
-
-                                await RegexStorageSQLite.save(exprObj); 
-                                addFavorite(exprObj); // guardar en favoritos (Zustand)
-
-                                setSaveMessage('Expresión guardada en favoritos');
-                                setTimeout(() => setSaveMessage(''), 3000);
-                            } catch (err) {
-                                setSaveMessage(' Error al guardar en favoritos');
-                                setTimeout(() => setSaveMessage(''), 3000);
-                            }
+                    {/* se importa el boton que hace que se guarde la expresion regular en la tabla que pusimos */}
+                    {/*usando SQlite además de mostrar los mensajes de exito o error*/}
+                    <ExpressionSavePanel
+                        expression={expression}
+                        onSaved={(msg) => {
+                            setSaveMessage(msg);
+                            setTimeout(() => setSaveMessage(''), 3000);
                         }}
-                    ><Text style={styles.buttonText}>Guardar Expresión</Text></Pressable>
+                    />
 
                     <Pressable
                         style={styles.button}
