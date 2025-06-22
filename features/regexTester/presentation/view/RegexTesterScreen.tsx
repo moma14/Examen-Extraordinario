@@ -5,13 +5,12 @@ import { useRegexTesterViewModel } from '../viewmodel/useRegexTesterViewModel';
 import { MatchHighlighter } from '../components/MatchHighlighter';
 import { generateAST } from '../../domain/usecases/GenerateASTUseCase';
 import React, { useEffect, useMemo, useState } from 'react';;
-import { ASTTreeViewer } from '../components/ASTTreeViewer';
-import { RegexStorageSQLite } from '../../data/local/RegexStorageSQLite';
 import { RegexExpression } from '../../domain/entities/RegexExpression';
 import { useRouter } from 'expo-router';
 import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpressionUseCase';
 import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
-import { ExpressionSavePanel } from '../../../../shared/components/organisms/ExpressionSavePanel';
+import { ExpressionSavePanel } from '../../../../shared/components/molecules/ExpresionSavePanel';
+import { ASTVisualizer } from '../../../../shared/components/organisms/ASTVisualizer'
 
 
 export const RegexTesterScreen = () => {
@@ -87,8 +86,8 @@ export const RegexTesterScreen = () => {
                     {/*esto hace que se marquen las coincidencias encontradas */}
                     <MatchHighlighter text={testText} matches={matches} />
 
-                    {/* se importa el boton que hace que se guarde la expresion regular en la tabla que pusimos */}
-                    {/*usando SQlite además de mostrar los mensajes de exito o error*/}
+                    {/* se importan los botones que hace que se guarde la expresion regular usando SQlite, y  */}
+                    {/* el que hace que lo mandemos a la vista de favoritos además de mostrar los mensajes de exito o error*/}
                     <ExpressionSavePanel
                         expression={expression}
                         onSaved={(msg) => {
@@ -97,24 +96,12 @@ export const RegexTesterScreen = () => {
                         }}
                     />
 
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => router.push('/(drawer)/Favoritos')}
-                    ><Text style={styles.buttonText}>Mostrar expresiones favoritas</Text></Pressable>
-
                     {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
                     {saveMessage !== '' && (
                         <Text style={styles.info}>{saveMessage}</Text>
                     )}
                     {/*aqui se visualiza el AST */}
-                    <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
-                    {ast ? (
-                        <ASTTreeViewer ast={ast} />
-                    ) : null}
-
-                    {astError && (
-                        <Text style={styles.error}>Error generando AST: {astError}</Text>
-                    )}
+                    <ASTVisualizer ast={ast} error={astError} />
 
                 </>
             )}

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { Pressable, Text, StyleSheet, View } from 'react-native';
 import { RegexStorageSQLite } from '../../../features/regexTester/data/local/RegexStorageSQLite';
 import { useFavoriteRegexStore } from '../../../app/store/useFavoriteRegexStore';
+import { useRouter } from 'expo-router';
 
 interface Props {
   expression: string;
-  onSaved?: (message: string) => void;
+  onSaved?: (message: string) => void;//se se guarda o no muestra un mensaje
 }
 
 export const ExpressionSavePanel = ({ expression, onSaved }: Props) => {
   const { addFavorite } = useFavoriteRegexStore();
+  const router = useRouter();
 
   const handleSave = async () => {
     try {
@@ -22,23 +24,31 @@ export const ExpressionSavePanel = ({ expression, onSaved }: Props) => {
       const exprObj = { pattern, flags };
 
       await RegexStorageSQLite.save(exprObj);
-      addFavorite(exprObj);//lo guarda en la store de zustand
+      addFavorite(exprObj); //lo guarda en la store de zustand
 
-      onSaved?.('Expresión guardada en favoritos'); //si se guardó el mensaje con éxito muestra este mensaje
+      onSaved?.('Expresión guardada en favoritos');//muestra este mensaje si se guardo correctamente la expresión
     } catch (err) {
-      onSaved?.('Error al guardar en favoritos');//si hubo algún problema muestra este
+      onSaved?.('Error al guardar en favoritos');//si aparece un error
     }
   };
 
   return (
-    //boton reutilizable para guardar la expresión
-    <Pressable style={styles.button} onPress={handleSave}>
-      <Text style={styles.buttonText}>Guardar Expresión</Text>
-    </Pressable>
+    <View style={styles.panel}>
+      <Pressable style={styles.button} onPress={handleSave}>
+        <Text style={styles.buttonText}>Guardar Expresión</Text>
+      </Pressable>
+
+      <Pressable style={styles.button} onPress={() => router.push('/(drawer)/Favoritos')}>
+        <Text style={styles.buttonText}>Mostrar expresiones favoritas</Text>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  panel: {
+    gap: 10,
+  },
   button: {
     alignItems: 'center',
     backgroundColor: '#007AFF',
