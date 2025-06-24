@@ -1,3 +1,3 @@
-import {HistorialScreen} from '../../features/regexTester/presentation/view/FavoriteScreen'
+import {FavoriteScreen} from '../../features/regexTester/presentation/view/FavoriteScreen'
 
-export default HistorialScreen;
+export default FavoriteScreen;
