@@ -11,6 +11,9 @@ import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpression
 import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
 import { ExpressionSavePanel } from '../../../../shared/components/molecules/ExpresionSavePanel';
 import { ASTVisualizer } from '../../../../shared/components/organisms/ASTVisualizer'
+import { MatchCount } from '../../../../shared/components/atoms/MatchCount';
+import { SaveMessage } from '../../../../shared/components/atoms/SaveMessage';
+
 
 
 export const RegexTesterScreen = () => {
@@ -79,9 +82,8 @@ export const RegexTesterScreen = () => {
                 <Text style={styles.error}> Error: {error}</Text>
             ) : (
                 <>
-                    <Text style={styles.matches}>
-                        Coincidencias encontradas: {matches.length}
-                    </Text>
+                    {/*se importa el atom para encontrar las coincidencias */}
+                    <MatchCount count={matches.length} />
 
                     {/*esto hace que se marquen las coincidencias encontradas */}
                     <MatchHighlighter text={testText} matches={matches} />
@@ -96,10 +98,9 @@ export const RegexTesterScreen = () => {
                         }}
                     />
 
-                    {/*se muestra el mensaje de Expresion guardada o error al guardar, al presionar el bton */}
-                    {saveMessage !== '' && (
-                        <Text style={styles.info}>{saveMessage}</Text>
-                    )}
+                    {/*se importa el atomo para visualizar el mensaje de guardado */}
+                    <SaveMessage message={saveMessage} />
+
                     {/*aqui se visualiza el AST */}
                     <ASTVisualizer ast={ast} error={astError} />
 
