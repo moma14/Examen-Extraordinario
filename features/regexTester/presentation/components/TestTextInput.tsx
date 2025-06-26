@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, View, Text, StyleSheet } from 'react-native';
+import { useThemeColors } from '../../../../shared/hooks/useThemeColors';
 
 interface Props {
   value: string;
@@ -7,14 +8,24 @@ interface Props {
 }
 
 export const TestTextInput = ({ value, onChange }: Props) => {
+  const colors=useThemeColors();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Texto a Evaluar: </Text>
+      <Text style={[styles.label, { color: colors.text }]}>Texto a Evaluar: </Text>
       <TextInput
         value={value}
         onChangeText={onChange}
         placeholder="Ej: 123-45-6789"
-        style={styles.input}
+        placeholderTextColor={colors.placeholder}
+        style={[
+          styles.input,
+          {
+            borderColor: colors.border,
+            backgroundColor: colors.inputBackground,
+            color: colors.text,
+          },
+        ]}
         multiline
       />
     </View>
