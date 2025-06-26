@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
-import { useThemeColors } from '../../hooks/useThemeColors';
 
 interface Props {
   pattern: string;
@@ -8,9 +7,8 @@ interface Props {
 }
 
 export const ExpressionItem = ({ pattern, flags }: Props) => {
-  const colors=useThemeColors();
   return (
-    <Text style={[styles.item, { color: colors.text }]}>
+    <Text style={styles.item}>
       /{pattern}/{flags ?? ''}
     </Text>
   );

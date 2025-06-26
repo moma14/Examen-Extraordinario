@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RegexExpression } from '../../features/regexTester/domain/entities/RegexExpression';
 
 interface FavoriteStore {
-  favorites: RegexExpression[];//agrega la nueva expresion al arreglo
-  addFavorite: (expr: RegexExpression) => void;//el resultado se guarda al inicio del arreglo
+  favorites: RegexExpression[]; //se agrega la expresión al arreglo
+  addFavorite: (expr: RegexExpression) => void;//el resultado se pone al inicio del arreglo
 }
 
 export const useFavoriteRegexStore = create<FavoriteStore>()(
@@ -19,7 +19,7 @@ export const useFavoriteRegexStore = create<FavoriteStore>()(
         }),
     }),
     {
-      name: 'FAVORITE_REGEX_STORE',
+      name: 'favorite-regex-storage', // nombre en AsyncStorage
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

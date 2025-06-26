@@ -19,7 +19,7 @@ export const ASTVisualizer = ({ ast, error }: Props) => {
 
   return (
     <View>
-      <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
+      <Text style={[styles.subtitle, { color: colors.text }]}>Árbol de Sintaxis (AST):</Text>
 
       <ASTTreeViewer ast={ast} />
     </View>
