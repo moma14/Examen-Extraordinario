@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { ASTTreeViewer } from '../../../features/regexTester/presentation/components/ASTTreeViewer';
+import { useThemeColors } from '../../hooks/useThemeColors';
 
 interface Props {
   ast: any;
@@ -13,11 +14,13 @@ export const ASTVisualizer = ({ ast, error }: Props) => {
   }
 
   if (!ast) return null;
+  const colors=useThemeColors();
+
 
   return (
     <View>
         {/*aqui se visualiza el AST */}
-      <Text style={styles.subtitle}>Árbol de Sintaxis (AST):</Text>
+      <Text style={[styles.subtitle, { color: colors.text }]}>Árbol de Sintaxis (AST):</Text>
       <ASTTreeViewer ast={ast} />
     </View>
   );

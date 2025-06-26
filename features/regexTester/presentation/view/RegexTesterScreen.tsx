@@ -75,7 +75,7 @@ export const RegexTesterScreen = () => {
     }, [expression]);
 
     return (
-        <ScrollView  contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
+        <ScrollView   style={{ backgroundColor: colors.background }}  contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
             <ButtonTheme/>
 
             <Text style={[styles.title, { color: colors.text }]}>Tester de Expresiones Regulares</Text>
