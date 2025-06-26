@@ -13,7 +13,8 @@ import { ExpressionSavePanel } from '../../../../shared/components/molecules/Exp
 import { ASTVisualizer } from '../../../../shared/components/organisms/ASTVisualizer'
 import { MatchCount } from '../../../../shared/components/atoms/MatchCount';
 import { SaveMessage } from '../../../../shared/components/atoms/SaveMessage';
-
+import { useThemeColors } from '../../../../shared/hooks/useThemeColors';
+import { ButtonTheme } from '../../../../shared/components/atoms/ButtonTheme';
 
 
 export const RegexTesterScreen = () => {
@@ -32,6 +33,7 @@ export const RegexTesterScreen = () => {
     const router = useRouter();
     const { addFavorite } = useFavoriteRegexStore();
     const [saveMessage, setSaveMessage] = useState('');
+    const colors=useThemeColors();
 
 
 
@@ -73,8 +75,10 @@ export const RegexTesterScreen = () => {
     }, [expression]);
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.title}>Tester de Expresiones Regulares</Text>
+        <ScrollView  contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
+            <ButtonTheme/>
+
+            <Text style={[styles.title, { color: colors.text }]}>Tester de Expresiones Regulares</Text>
             <RegexInput value={expression} onChange={setExpression} />
             <TestTextInput value={testText} onChange={setTestText} />
 

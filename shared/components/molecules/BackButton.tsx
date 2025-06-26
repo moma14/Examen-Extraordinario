@@ -1,11 +1,16 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
+import { useThemeColors } from '../../hooks/useThemeColors';
 
 //este es el boton reutilizable para volver a la vista principal
-export const BackButton = ({ onPress }: { onPress: () => void }) => (
-  <Pressable style={styles.button} onPress={onPress}>
-    <Text style={styles.text}>Regresar</Text>
-  </Pressable>
-);
+export const BackButton = ({ onPress }: { onPress: () => void }) => {
+
+  const colors = useThemeColors();
+  return (
+    <Pressable style={[styles.button, { backgroundColor: colors.primary }]} onPress={onPress}>
+      <Text style={[styles.text, { color: colors.text }]}>Regresar</Text>
+    </Pressable>
+  )
+};
 
 const styles = StyleSheet.create({
   button: {
