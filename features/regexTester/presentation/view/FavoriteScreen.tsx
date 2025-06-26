@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { use } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
 import { FavoriteExpressionList } from '../../../../shared/components/molecules/FavoriteExpressionList';
 import { BackButton } from '../../../../shared/components/molecules/BackButton';
 import { useRouter } from 'expo-router';
+import { useThemeColors } from '../../../../shared/hooks/useThemeColors';
 
 export const FavoriteScreen = () => {
   const { favorites } = useFavoriteRegexStore();
-   const router = useRouter();
+  const router = useRouter();
+  const colors=useThemeColors();
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Expresiones Favoritas</Text>
+    <ScrollView style={{ backgroundColor: colors.background }} 
+     contentContainerStyle={styles.container}>
+      <Text style={[styles.title, { color: colors.text }]}>Expresiones Favoritas</Text>
       <FavoriteExpressionList favorites={favorites} />
 
       {/*reutilizamos el boton de regresar */}

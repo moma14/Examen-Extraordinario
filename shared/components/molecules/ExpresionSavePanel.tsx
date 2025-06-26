@@ -28,6 +28,7 @@ export const ExpressionSavePanel = ({ expression, onSaved }: Props) => {
 
       onSaved?.('Expresión guardada en favoritos');//muestra este mensaje si se guardo correctamente la expresión
     } catch (err) {
+      console.error('Error al guardar en favoritos:', err); 
       onSaved?.('Error al guardar en favoritos');//si aparece un error
     }
   };

@@ -1,18 +1,26 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RegexExpression } from '../../features/regexTester/domain/entities/RegexExpression';
 
 interface FavoriteStore {
-  favorites: RegexExpression[]; // esta es para la lista de expresiones favoritas
-  addFavorite: (expr: RegexExpression) => void;  // este método para agregar una nueva
+  favorites: RegexExpression[];//agrega la nueva expresion al arreglo
+  addFavorite: (expr: RegexExpression) => void;//el resultado se guarda al inicio del arreglo
 }
 
-export const useFavoriteRegexStore = create<FavoriteStore>((set) => ({
-  favorites: [],
-  addFavorite: (expr) =>
-    set((state) => {
-      const updated = [expr, ...state.favorites.filter(e => e.pattern !== expr.pattern)];//quita cualquier expresión con el mismo pattern (evita duplicados).
-        //luego agrega la nueva expr al inicio del arreglo.
-        //el resultado se guarda como el nuevo estado.
-      return { favorites: updated };
+export const useFavoriteRegexStore = create<FavoriteStore>()(
+  persist(
+    (set) => ({
+      favorites: [],
+      addFavorite: (expr) =>
+        set((state) => {
+          const updated = [expr, ...state.favorites.filter(e => e.pattern !== expr.pattern)];
+          return { favorites: updated };
+        }),
     }),
-}));
+    {
+      name: 'FAVORITE_REGEX_STORE',
+      storage: createJSONStorage(() => AsyncStorage),
+    }
+  )
+);

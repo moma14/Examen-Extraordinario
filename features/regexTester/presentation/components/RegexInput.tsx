@@ -7,18 +7,28 @@ interface Props {
   onChange: (value: string) => void;
 }
 
+// Función para limpiar caracteres invisibles y normalizar texto
+const cleanInput = (input: string): string => {
+  return input
+    .normalize('NFKC')
+    .replace(/[\u200B-\u200D\uFEFF\u202A-\u202E]/g, ''); // Elimina caracteres invisibles
+};
+
 export const RegexInput = ({ value, onChange }: Props) => {
-  const colors=useThemeColors();
+  const colors = useThemeColors();
 
   return (
     <View style={styles.container}>
       <Text style={[styles.label, { color: colors.text }]}>Expresión Regular</Text>
       <TextInput
         value={value}
-        onChangeText={onChange}
+        onChangeText={(text) => {
+          const cleaned = cleanInput(text);
+          onChange(cleaned);
+        }}
         placeholder="Ej: \\d{3}-\\d{2}-\\d{4}"
         placeholderTextColor={colors.placeholder}
-          style={[
+        style={[
           styles.input,
           {
             borderColor: colors.border,
@@ -35,10 +45,10 @@ export const RegexInput = ({ value, onChange }: Props) => {
 
 const styles = StyleSheet.create({
   container: { gap: 4 },
-  label: { fontWeight: '600',fontSize:18 },
+  label: { fontWeight: '600', fontSize: 18 },
   input: {
     borderWidth: 1,
-    fontSize:16,
+    fontSize: 16,
     padding: 8,
     borderRadius: 6,
   },

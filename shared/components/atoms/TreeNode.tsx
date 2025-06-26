@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { useThemeColors } from '../../hooks/useThemeColors';
 
 type Props = {
   label: string;
@@ -12,19 +11,13 @@ export const TreeNode = ({ label, children }: Props) => {
   const [expanded, setExpanded] = useState(false);//este estado es el que maneja para expandir o colapsar el diagrama
 
   const hasChildren = React.Children.count(children) > 0;//con esto se verifica si hay hijos
-  const colors=useThemeColors();
+
 
   return (
-    <View style={[styles.node, { borderColor: colors.border }]}>
+    <View style={styles.node}>
         {/* boton clickeable que se expande/colapsa si hay hijos */}
       <Pressable onPress={() => setExpanded(!expanded)}>
-        <Text style={[
-            styles.label,
-            {
-              color: colors.primary,
-              backgroundColor: colors.inputBackground,
-            },
-          ]}>
+        <Text style={styles.label}>
             {/* Si tiene hijos, muestra ▶ o ▼ dependiendo del estado */}
           {hasChildren ? (expanded ? '▼ ' : '▶ ') : '• '}
           {label}
