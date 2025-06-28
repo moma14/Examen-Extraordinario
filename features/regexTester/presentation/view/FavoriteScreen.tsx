@@ -5,15 +5,17 @@ import { FavoriteExpressionList } from '../../../../shared/components/molecules/
 import { BackButton } from '../../../../shared/components/molecules/BackButton';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '../../../../shared/hooks/useThemeColors';
+import { ClearFavoritesButton } from '../../../../shared/components/atoms/ClearFavoritesButton';
 
 export const FavoriteScreen = () => {
-  const { favorites } = useFavoriteRegexStore();
+  const { favorites, clearFavorites} = useFavoriteRegexStore();
   const router = useRouter();
   const colors=useThemeColors();
 
   return (
     <ScrollView style={{ backgroundColor: colors.background }} 
      contentContainerStyle={styles.container}>
+      <ClearFavoritesButton onClear={clearFavorites} />
       <Text style={[styles.title, { color: colors.text }]}>Expresiones Favoritas</Text>
       <FavoriteExpressionList favorites={favorites} />
 

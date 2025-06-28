@@ -6,6 +6,7 @@ export const lightColors = {
   border: '#000000',
   inputBackground: '#f0f0f0',
   placeholder: '#888',
+  highlight: '#ffff00',
 };
 
 //colores base para el modo oscuro
@@ -16,5 +17,5 @@ export const darkColors = {
   border: '#fff',
   inputBackground: '#1e1e1e',
   placeholder: '#aaa',
-  
+  highlight: '#ffdd57',
 };

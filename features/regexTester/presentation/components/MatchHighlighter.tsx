@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
+import { useThemeColors } from '../../../../shared/hooks/useThemeColors';
 
 interface Props {
   text: string;
@@ -16,12 +17,13 @@ export const MatchHighlighter = ({ text, matches }: Props) => {
   const pattern = new RegExp(`(${matches.map(escapeRegExp).join('|')})`, 'g');
 
   const parts = text.split(pattern);
+  const colors= useThemeColors();
 
   return (
-    <Text style={styles.text}>
+    <Text style={[styles.text, { color: colors.text }]}>
       {parts.map((part, index) =>
         matches.includes(part) ? (
-          <Text key={index} style={styles.highlight}>
+          <Text key={index} style={[styles.highlight, { backgroundColor: colors.highlight }]}>
             {part}
           </Text>
         ) : (
