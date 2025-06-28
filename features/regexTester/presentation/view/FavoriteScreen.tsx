@@ -1,6 +1,6 @@
 import React, { use } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
+import { useFavoriteRegexStore } from '../../store/useFavoriteRegexStore';
 import { FavoriteExpressionList } from '../../../../shared/components/molecules/FavoriteExpressionList';
 import { BackButton } from '../../../../shared/components/molecules/BackButton';
 import { useRouter } from 'expo-router';

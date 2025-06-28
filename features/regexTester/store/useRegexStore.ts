@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { RegexExpression } from '../../features/regexTester/domain/entities/RegexExpression';
+import { RegexExpression } from '../domain/entities/RegexExpression';
 
 interface RegexStore {
   recentExpressions: RegexExpression[];// la lista de expresiones recientes guardadas

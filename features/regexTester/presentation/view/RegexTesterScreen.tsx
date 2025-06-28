@@ -8,7 +8,7 @@ import React, { useEffect, useMemo, useState } from 'react';;
 import { RegexExpression } from '../../domain/entities/RegexExpression';
 import { useRouter } from 'expo-router';
 import { saveRecentExpression } from '../../domain/usecases/SaveRecentExpressionUseCase';
-import { useFavoriteRegexStore } from '../../../../app/store/useFavoriteRegexStore';
+import { useFavoriteRegexStore } from '../../store/useFavoriteRegexStore';
 import { ExpressionSavePanel } from '../../../../shared/components/molecules/ExpresionSavePanel';
 import { ASTVisualizer } from '../../../../shared/components/organisms/ASTVisualizer'
 import { MatchCount } from '../../../../shared/components/atoms/MatchCount';

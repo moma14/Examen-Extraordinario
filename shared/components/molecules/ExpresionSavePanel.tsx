@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet, View } from 'react-native';
 import { RegexStorageSQLite } from '../../../features/regexTester/data/local/RegexStorageSQLite';
-import { useFavoriteRegexStore } from '../../../app/store/useFavoriteRegexStore';
+import { useFavoriteRegexStore } from '../../../features/regexTester/store/useFavoriteRegexStore';
 import { useRouter } from 'expo-router';
 
 interface Props {

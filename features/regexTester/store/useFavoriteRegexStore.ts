@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { RegexExpression } from '../../features/regexTester/domain/entities/RegexExpression';
+import { RegexExpression } from '../domain/entities/RegexExpression';
 
 interface FavoriteStore {
   favorites: RegexExpression[]; //se agrega la expresión al arreglo

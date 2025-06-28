@@ -1,5 +1,5 @@
 import { RegexExpression } from '../entities/RegexExpression';
-import { useRegexStore } from '../../../../app/store/useRegexStore';
+import { useRegexStore } from '../../store/useRegexStore';
 
 export const saveRecentExpression = (expression: RegexExpression) => {
   //esta función encapsula la lógica para guardar una expresión reciente

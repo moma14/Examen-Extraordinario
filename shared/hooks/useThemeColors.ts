@@ -1,4 +1,4 @@
-import { useThemeStore } from '../../app/store/useThemeStore';
+import { useThemeStore } from '../../features/regexTester/store/useThemeStore';
 import { darkColors, lightColors } from '../theme/colors';
 
 //con esto devuelve los colores segun el tema activo

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const FavoriteExpressionList = ({ favorites }: Props) => {
-  const colors=useThemeColors();
+  const colors = useThemeColors();
   if (favorites.length === 0) {
     //este texto se mostrará si no hay ninguna expresión guardada
     return <Text style={{ color: colors.text }}>No hay expresiones favoritas.</Text>;
