@@ -1,5 +1,5 @@
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
-import { useRegexStore } from '../../../features/regexTester/store/useRegexStore';
+import { useRegexStore } from '../../store/useRegexStore';
 import { ExpressionItem } from '../atoms/SavedItem';
 import { BackButton } from '../molecules/BackButton';
 import { useRouter } from 'expo-router';

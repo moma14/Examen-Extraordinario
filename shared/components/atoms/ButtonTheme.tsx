@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
-import { useThemeStore } from '../../../features/regexTester/store/useThemeStore';
+import { useThemeStore } from '../../store/useThemeStore';
 import { useThemeColors } from '../../hooks/useThemeColors';
 
 export const ButtonTheme = () => {
