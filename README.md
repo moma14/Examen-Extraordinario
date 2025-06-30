@@ -39,7 +39,8 @@ cabe aclarar que esa vista tiene persistencia con lo cuál, si se reinicia la ap
 mantendrán ahí.
 
 Abajo de esos botones tenemos el espacio para el diagrama AST, como dije antes si la expresión es correcta y válida, el
-AST se genera automaticamente, y es desplegable, soporta cuantificadores, alternancia etc.
+AST se genera automaticamente, y es desplegable, soporta cuantificadores, alternancia etc. Tambien permite descargar el AST,
+da la opcion para compartir y mandarselo a alguien o que se guarde el archivo en el celular.
 
 Por ultimo en la parte de arriba de la vista principal tenemos otro botÓn que es para cambiar el tema a modo oscuro, como
 parte de los puntos extra se lo puse, se aplica para todas las vistas, incluyendo textos, botones incluso el AST.
