@@ -44,6 +44,35 @@ AST se genera automaticamente, y es desplegable, soporta cuantificadores, altern
 Por ultimo en la parte de arriba de la vista principal tenemos otro botÓn que es para cambiar el tema a modo oscuro, como
 parte de los puntos extra se lo puse, se aplica para todas las vistas, incluyendo textos, botones incluso el AST.
 
-Y por ultimo tenemos la ultima vista que es la de Recientes, este es el historial, tambien como parte de los puntos extras.
+Y por ultimo tenemos la vista de Recientes, este es el historial, tambien como parte de los puntos extras.
 Ahi se muestran todas las expresiones que el usuario haya usado, mientras una expresión se haya usado en el input y esté correcta, 
 se verá automaticamente en esta vista, y como en la vista de favoritos tambien cuenta con persistencia.
+
+EJEMPLOS DE EXPRESIONES PARA PROBAR:
+
+CODIGO POSTAL:
+/^\d{5}$/gm
+
+97000
+98000
+99000
+
+PALABRAS CON TELEFONOS
+/\d{3}-\d{3}-\d{4}/g
+Llama al 123-456-7890 o al 321-654-0987
+
+PALABRAS CON DOBLE VOCAL
+/\w*[aeiou]{2}\w*/gi
+El zoológico tiene muchas especies y biología interesante.
+
+PALABRAS QUE EMPIEZAN CON MAYUSCULA
+/\b[A-Z][a-z]+/g
+Carlos vive en Merida y trabaja en OpenAI.
+
+PALABRAS ENTRE COMILLAS
+/"[^"]*"/g
+Ella dijo: "Hola mundo". Después añadió: "Esto funciona".
+
+PALABRAS CON CORREO ELECTRONICO
+/[\w.-]+@[\w.-]+\.\w+/g
+Contacta a ana.lopez@mail.com o juan_92@empresa.org
