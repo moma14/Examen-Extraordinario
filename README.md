@@ -57,22 +57,32 @@ CODIGO POSTAL:
 98000
 99000
 
-PALABRAS CON TELEFONOS
+PALABRAS CON TELEFONOS:
+
 /\d{3}-\d{3}-\d{4}/g
+
 Llama al 123-456-7890 o al 321-654-0987
 
-PALABRAS CON DOBLE VOCAL
+PALABRAS CON DOBLE VOCAL:
+
 /\w*[aeiou]{2}\w*/gi
+
 El zoológico tiene muchas especies y biología interesante.
 
-PALABRAS QUE EMPIEZAN CON MAYUSCULA
+PALABRAS QUE EMPIEZAN CON MAYUSCULA:
+
 /\b[A-Z][a-z]+/g
+
 Carlos vive en Merida y trabaja en OpenAI.
 
-PALABRAS ENTRE COMILLAS
+PALABRAS ENTRE COMILLAS:
+
 /"[^"]*"/g
+
 Ella dijo: "Hola mundo". Después añadió: "Esto funciona".
 
-PALABRAS CON CORREO ELECTRONICO
+PALABRAS CON CORREO ELECTRONICO:
+
 /[\w.-]+@[\w.-]+\.\w+/g
+
 Contacta a ana.lopez@mail.com o juan_92@empresa.org
