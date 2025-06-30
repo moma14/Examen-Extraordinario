@@ -4,7 +4,9 @@ import { RegexStorageSQLite } from '../../features/regexTester/data/local/RegexS
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function Layout() {
-
+  useEffect(() => {
+    RegexStorageSQLite.init(); // se asegura que la tabla se cree al abrir cualquier vista del drawer
+  }, []);
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer>
